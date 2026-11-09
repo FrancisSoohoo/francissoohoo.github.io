@@ -1,0 +1,18 @@
+# Working files: kept on this laptop, never published
+.impeccable/
+.claude/
+PRODUCT.md
+DESIGN.md
+tools/snaps/
+
+# Originals live outside this folder; this is a safety net in case they are ever copied back in
+rc car recourse/
+*.MOV
+*.mov
+*.HEIC
+*.heic
+
+# System clutter
+Thumbs.db
+desktop.ini
+.DS_Store

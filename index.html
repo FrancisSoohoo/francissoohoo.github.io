@@ -1,0 +1,967 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Siu Tsun Soo-Hoo (Francis) · Design Engineer</title>
+<meta name="description" content="Siu Tsun Soo-Hoo, call me Francis. MEng Design Engineering at Imperial College London, Formula Student engine team. Seeking a summer 2027 engineering internship.">
+<meta name="theme-color" content="#F2F2EE">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+TC:wght@500;700;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@900&text=%E5%8F%B8%E5%BE%92%E5%85%86%E6%B5%9A%E9%A6%99%E6%B8%AF%E8%A3%BD%E9%80%A0%E6%A0%A1%E9%A9%97&display=block">
+<link rel="stylesheet" href="css/style.css">
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/","matter-js":"https://cdn.jsdelivr.net/npm/matter-js@0.19.0/+esm"}}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.2"/>
+    </filter>
+    <pattern id="ht-1" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle cx="3" cy="3" r="0.8" fill="#111"/></pattern>
+    <pattern id="ht-2" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle cx="3" cy="3" r="1.3" fill="#111"/></pattern>
+    <pattern id="ht-3" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle cx="3" cy="3" r="1.8" fill="#111"/></pattern>
+    <pattern id="ht-4" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle cx="3" cy="3" r="2.3" fill="#111"/></pattern>
+    <pattern id="ht-5" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle cx="3" cy="3" r="2.85" fill="#111"/></pattern>
+    <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" stroke="#111" stroke-width="1"/></pattern>
+  </defs>
+</svg>
+
+<header class="masthead">
+  <a class="brand" href="#cover" aria-label="Soo-Hoo, back to top">
+    <span class="chop chop--sm" aria-hidden="true"><span>司</span><span>徒</span></span>
+    <span class="brand-name">Soo-Hoo <span lang="zh-Hant">司徒</span></span>
+  </a>
+  <span class="masthead-cat">Catalogue 2027 <span lang="zh-Hant">目錄</span></span>
+  <span class="masthead-page" aria-live="off">Page <span class="roll" id="page-roll" data-digits="3" data-value="1">001</span> <span lang="zh-Hant">頁</span></span>
+  <div class="vol" role="group" aria-label="Sound volume for the whole page">
+    <button class="vol-btn" type="button" id="vol-btn" aria-pressed="false" aria-label="Mute all sound">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 7.5h3l4-3.5v12l-4-3.5H3z" fill="currentColor"/><path class="vol-w1" d="M12.6 7.4a3.4 3.4 0 0 1 0 5.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path class="vol-w2" d="M14.8 5.2a6.4 6.4 0 0 1 0 9.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path class="vol-x" d="M12.5 7.5l5 5m0-5l-5 5" stroke="currentColor" stroke-width="1.8"/></svg>
+    </button>
+    <label class="vh" for="vol-range">Volume</label>
+    <input class="vol-range" id="vol-range" type="range" min="0" max="100" step="1" value="55">
+    <span class="vol-num mono" id="vol-num" aria-hidden="true">55</span>
+  </div>
+  <div class="search" role="search">
+    <button class="search-btn" type="button" aria-label="Open search" aria-expanded="false"></button>
+    <label class="vh" for="search-input">Search the catalogue</label>
+    <svg class="search-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><line x1="12.6" y1="12.6" x2="17" y2="17" stroke="currentColor" stroke-width="1.8"/></svg>
+    <input id="search-input" type="search" autocomplete="off" spellcheck="false" placeholder="Search parts, e.g. FEA, flywheel, R" aria-controls="search-results" aria-expanded="false" aria-autocomplete="list" role="combobox">
+    <kbd class="search-kbd" aria-hidden="true">/</kbd>
+    <ul id="search-results" class="search-results" role="listbox" hidden></ul>
+  </div>
+</header>
+
+<nav class="thumbs" aria-label="Catalogue sections">
+  <a href="#engineer" data-tab="engineer"><b>01</b><span class="en">Engineer</span></a>
+  <a href="#powertrain" data-tab="powertrain"><b>02</b><span class="en">Powertrain</span></a>
+  <a href="#data" data-tab="data"><b>03</b><span class="en">Data</span></a>
+  <a href="#design" data-tab="design"><b>04</b><span class="en">Design</span></a>
+  <a href="#track" data-tab="track"><b>05</b><span class="en">Test track</span></a>
+  <a href="#record" data-tab="record"><b>06</b><span class="en">Record</span></a>
+  <a href="#offspec" data-tab="offspec"><b>07</b><span class="en">Off-spec</span></a>
+  <a href="#contact" data-tab="contact"><b>08</b><span class="en">Contact</span></a>
+</nav>
+
+<main id="main">
+
+<!-- ============ COVER ============ -->
+<section class="cover" id="cover" data-page="0" aria-label="Cover">
+  <div class="cover-sheet" id="cover-sheet">
+    <canvas class="cover-bin" id="cover-bin" role="img" aria-label="Parts bin. Click to drop engineering parts, click a part to flick it, grab one to throw it, hold to magnetise, double-click to blast."></canvas>
+    <div class="cover-top">
+      <span>Catalogue <span lang="zh-Hant">目錄</span></span>
+      <span class="mono">Vol. 2027 · No. 01</span>
+      <span class="cover-route">Hong Kong · Cardiff · London</span>
+    </div>
+
+    <div class="cover-main">
+      <div class="cover-title">
+        <p class="cover-word"><span>Soo-</span><span>Hoo</span></p>
+        <p class="cover-sub"><span>Siu Tsun Soo-Hoo</span><span class="cover-zh" lang="zh-Hant">司徒兆浚</span><span>call me Francis</span></p>
+        <p class="cover-lede">Design engineer. Race-engine parts, FEA and machine learning, catalogued as things you can pick up and test.</p>
+      </div>
+      <div class="cover-art">
+        <div class="cover-bintools">
+          <p class="cover-figlabel" id="bin-label">Parts bin · click to drop · hold to magnetise · double-click to blast</p>
+          <button class="btn btn--sm btn--ink cover-shake" id="cover-shake" type="button">Shake the bin</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="cover-foot">
+      <dl class="cover-cells">
+        <div><dt>Discipline</dt><dd>MEng Design Engineering</dd></div>
+        <div><dt>Institution</dt><dd>Imperial College London</dd></div>
+        <div><dt>Field service</dt><dd>Formula Student engine team</dd></div>
+        <div><dt>Wanted</dt><dd>Summer 2027 internship</dd></div>
+      </dl>
+      <div class="cover-actions">
+        <a class="btn btn--ink btn--lg cover-go" href="#engineer"><span class="cover-go-t">See my work <span lang="zh-Hant">作品</span></span><span class="cover-go-s">or just scroll</span>
+          <svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v11M3 8.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </a>
+        <div class="chop chop--cover" role="img" aria-label="Name chop: 司徒兆浚"><span>司</span><span>徒</span><span>兆</span><span>浚</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 01 ENGINEER ============ -->
+<section class="page page--hero" id="engineer" data-page="1" aria-labelledby="hero-title">
+  <figure class="fig fig--engine" id="fig-engine">
+    <figcaption class="fig-cap">
+      <span><b>Fig. 001</b> Parallel-twin four-stroke, schematic <span lang="zh-Hant">示意圖</span></span>
+      <span class="fig-hint" id="engine-hint">Drag to rotate</span>
+    </figcaption>
+    <div class="engine-stage" id="engine-stage">
+      <canvas id="engine-canvas" aria-label="Rotatable line drawing of a parallel-twin engine. Drag to rotate; hold Start to run it." role="img"></canvas>
+      <svg class="callouts" id="engine-callouts" aria-hidden="true"></svg>
+      <div class="engine-fallback" id="engine-fallback" hidden>
+        <svg viewBox="0 0 600 520" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round">
+          <path d="M90 300 L300 190 L520 300 L310 420 Z"/><path d="M90 300 V370 L310 490 V420"/><path d="M520 300 V370 L310 490"/>
+          <path d="M150 240 L300 160 L460 240 L310 320 Z"/><path d="M150 240 V292"/><path d="M460 240 V292"/>
+          <g stroke="#111" fill="#E3B505"><rect x="208" y="70" width="18" height="190"/><rect x="384" y="70" width="18" height="190"/></g>
+          <ellipse cx="250" cy="270" rx="48" ry="22"/><ellipse cx="370" cy="270" rx="48" ry="22"/>
+        </svg>
+        <p>Static drawing shown: this browser could not start WebGL.</p>
+      </div>
+    </div>
+    <div class="engine-controls">
+      <button class="btn btn--zinc btn--hold" id="engine-start" type="button" aria-describedby="engine-state">
+        <span class="hold-fill" aria-hidden="true"></span>
+        <span class="btn-label" id="engine-start-label">Hold to start</span>
+        <span class="btn-zh" lang="zh-Hant" id="engine-start-zh">按住啟動</span>
+      </button>
+      <button class="btn" id="engine-stop" type="button" disabled>Stop <span lang="zh-Hant">熄火</span></button>
+      <button class="btn" id="engine-explode" type="button" aria-pressed="false">Explode <span lang="zh-Hant">分解</span></button>
+      <button class="btn btn--icon" id="engine-sound" type="button" aria-pressed="true" aria-label="Engine sound on">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path class="wave" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.8"/><path class="mute" d="M16 9l6 6M22 9l-6 6" stroke="currentColor" stroke-width="1.8"/></svg>
+      </button>
+      <div class="tach" aria-live="off">
+        <span class="tach-digits" id="tach-digits"><i>0</i><i>0</i><i>0</i><i>0</i><i>0</i></span>
+        <span class="tach-unit">rpm</span>
+      </div>
+      <p class="vh" id="engine-state" aria-live="polite">Engine stopped.</p>
+    </div>
+  </figure>
+
+  <div class="spec spec--hero">
+    <h1 id="hero-title" class="hero-name">
+      <span class="hero-line">Siu Tsun</span>
+      <span class="hero-line">Soo-Hoo</span>
+    </h1>
+    <p class="hero-zh" lang="zh-Hant">司徒兆浚</p>
+    <p class="hero-aka">Call me <strong>Francis</strong>.</p>
+    <p class="hero-desc">Design engineer. I spec race-engine parts, run FEA on them, and build machine-learning models in Python and R.</p>
+    <p class="hero-avail"><span class="dot" aria-hidden="true"></span>Available for a summer 2027 internship</p>
+
+    <div class="cta-row">
+      <a class="btn btn--zinc btn--lg" href="#contact">Contact me <span lang="zh-Hant">聯絡</span></a>
+    </div>
+    <nav class="hero-index" aria-label="Jump to a section">
+      <span class="hero-index-lbl">Jump to</span>
+      <a href="#powertrain"><b>02</b>Powertrain</a>
+      <a href="#data"><b>03</b>Data</a>
+      <a href="#design"><b>04</b>Design</a>
+      <a href="#track"><b>05</b>Test track</a>
+      <a href="#record"><b>06</b>Record</a>
+      <a href="#offspec"><b>07</b>Off-spec</a>
+    </nav>
+
+    <table class="spec-table">
+      <caption class="vh">Specification</caption>
+      <tbody>
+        <tr><th scope="row">Part no. <span lang="zh-Hant">編號</span></th><td class="mono">FSH-MENG-29</td></tr>
+        <tr><th scope="row">Programme <span lang="zh-Hant">課程</span></th><td>MEng Design Engineering, Year 2 of 4, Dyson School, Imperial College London</td></tr>
+        <tr><th scope="row">Field service <span lang="zh-Hant">實戰</span></th><td>Imperial Formula Racing, engine team<br>Panasonic, engineering trainee and cohort lead</td></tr>
+        <tr class="row-skills"><th scope="row">Interfaces <span lang="zh-Hant">介面</span></th><td>
+          <span class="skill-line"><b>Mechanical</b> 3D CAD · FEA · prototyping · design for manufacture · solid mechanics · thermofluids · materials selection</span>
+          <span class="skill-line"><b>Electronics</b> circuits · sensors · mechatronics · signals and control</span>
+          <span class="skill-line"><b>Software</b> Python (scikit-learn) · R · machine learning · decision trees · time-series analysis · statistics</span>
+        </td></tr>
+        <tr><th scope="row">Languages <span lang="zh-Hant">語言</span></th><td>English · <span lang="zh-Hant">廣東話</span> Cantonese · <span lang="zh-Hant">普通話</span> Mandarin</td></tr>
+        <tr><th scope="row">Origin <span lang="zh-Hant">產地</span></th><td>Hong Kong <span lang="zh-Hant">香港</span>, now London / Cardiff, UK</td></tr>
+        <tr class="row-avail"><th scope="row">Availability <span lang="zh-Hant">供貨</span></th><td><span class="dot" aria-hidden="true"></span>Summer 2027 internship</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 02 POWERTRAIN ============ -->
+<section class="page" id="powertrain" data-page="2" aria-labelledby="pt-title">
+  <header class="page-head">
+    <span class="page-tab">02</span>
+    <h2 id="pt-title">Powertrain</h2>
+    <p class="page-meta">Imperial Formula Racing, engine team · Kawasaki Ninja 400 base engine · Oct 2025 – Jun 2026</p>
+  </header>
+
+  <div class="folders" data-folders>
+    <div class="folder-tabs" role="tablist" aria-label="Powertrain parts">
+      <button class="folder-tab" type="button" role="tab" id="ft-fly" aria-controls="part-flywheel" aria-selected="true"><span class="ft-kind">Part 02-01 · Rejected on data</span><span class="ft-name">Flywheel</span></button>
+      <button class="folder-tab" type="button" role="tab" id="ft-studs" aria-controls="part-studs" aria-selected="false" tabindex="-1"><span class="ft-kind">Part 02-02 · Investigated, ordered</span><span class="ft-name">Head studs</span></button>
+    </div>
+  <!-- Part 02-01 flywheel -->
+  <article class="part part--bench folder-panel" id="part-flywheel" role="tabpanel" aria-labelledby="ft-fly">
+    <div class="bench-head">
+      <h3 id="fly-title" class="part-title"><span class="part-no">02-01</span>Flywheel, lightweighted <span lang="zh-Hant">飛輪減重</span></h3>
+      <p class="bench-lede">Where can material come off a flywheel before it stops being worth it? Hold to rev it, switch on the FEA contour, and change the pockets, the base plate and how much rim wall gets skimmed off both sides.</p>
+    </div>
+
+    <figure class="fig flywheel" id="flywheel-fig">
+      <figcaption class="fig-cap"><span><b>Fig. 002</b> Flywheel in 3D, with section A–A</span><span class="fig-hint" id="fw-hint">Drag to rotate · right-drag to pan</span></figcaption>
+      <div class="fw-view">
+        <div class="fw-stage" id="fw-stage">
+          <canvas id="flywheel-canvas" role="img" aria-label="3D flywheel with lightening pockets in the base plate, a rim wall with ring gear, and a hub. Drag to rotate, right-drag to pan. Hold the rev button to spin it up."></canvas>
+          <div class="fw-zoom" aria-label="View">
+            <button class="btn btn--sm btn--icon" type="button" id="fw-zoom-in" aria-label="Zoom in"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2"/></svg></button>
+            <button class="btn btn--sm btn--icon" type="button" id="fw-zoom-out" aria-label="Zoom out"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10" stroke="currentColor" stroke-width="2"/></svg></button>
+            <button class="btn btn--sm btn--icon" type="button" id="fw-zoom-reset" aria-label="Reset view"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8a4.5 4.5 0 1 0 1.3-3.2M3.5 2.5v3h3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>
+          </div>
+          <div class="fw-key" id="fw-key" hidden>
+            <span><i class="k-solid"></i>Centrifugal, ρω²r</span>
+            <span><i class="k-dash"></i>Spin-up inertia, ρrα</span>
+          </div>
+          <div class="fw-legend" id="fw-legend" hidden></div>
+        </div>
+        <canvas class="fw-section" id="flywheel-section" role="img" aria-label="Section A–A: half profile of the flywheel showing hub, base plate and rim wall, with any skim on both sides of the plate."></canvas>
+      </div>
+      <div class="engine-controls fw-controls">
+        <button class="btn btn--zinc btn--hold" id="fw-rev" type="button"><span class="hold-fill" aria-hidden="true"></span><span id="fw-rev-label">Hold to rev</span> <span lang="zh-Hant">按住加速</span></button>
+        <button class="btn" id="fw-stop" type="button" disabled>Stop <span lang="zh-Hant">停止</span></button>
+        <div class="seg" role="radiogroup" aria-label="View">
+          <button type="button" role="radio" aria-checked="true" data-view="halftone">Drawing</button>
+          <button type="button" role="radio" aria-checked="false" data-view="contour">FEA contour</button>
+        </div>
+        <button class="btn btn--sm" type="button" id="fw-forces" aria-pressed="false">Force vectors</button>
+        <button class="btn btn--sm" type="button" id="fw-deform" aria-pressed="false">Deformed ×400</button>
+        <div class="tach" aria-live="off"><span class="tach-digits" id="fw-tach"><i>0</i><i>0</i><i>0</i><i>0</i><i>0</i></span><span class="tach-unit">rpm</span></div>
+      </div>
+      <div class="fw-panel">
+        <div class="fw-group">
+          <p class="fw-group-title">Geometry <span lang="zh-Hant">幾何</span></p>
+          <div class="ctl">
+            <span class="ctl-lbl" id="pockets-lbl">Pockets in base plate</span>
+            <div class="seg" role="radiogroup" aria-labelledby="pockets-lbl">
+              <button type="button" role="radio" aria-checked="false" data-n="0">0</button>
+              <button type="button" role="radio" aria-checked="false" data-n="4">4</button>
+              <button type="button" role="radio" aria-checked="true" data-n="6">6</button>
+              <button type="button" role="radio" aria-checked="false" data-n="8">8</button>
+            </div>
+          </div>
+          <div class="ctl">
+            <label class="ctl-lbl" for="pocket-size">Pocket diameter <output class="ctl-val" id="pocket-size-out">0 mm</output></label>
+            <input type="range" id="pocket-size" min="0" max="100" value="55">
+          </div>
+          <div class="ctl">
+            <label class="ctl-lbl" for="plate-t">Base plate thickness <output class="ctl-val" id="plate-t-out">8.0 mm</output></label>
+            <input type="range" id="plate-t" min="40" max="120" value="80">
+          </div>
+          <div class="ctl">
+            <label class="ctl-lbl" for="wall-skim">Rim wall skim, both sides <output class="ctl-val" id="wall-skim-out">0.0 mm</output></label>
+            <input type="range" id="wall-skim" min="0" max="55" value="0">
+          </div>
+        </div>
+        <div class="fw-group readout">
+          <p class="readout-cap">Model readout <span class="tag-ill">Illustrative</span></p>
+          <dl>
+            <div><dt>Peak von Mises, now</dt><dd><span id="fw-peak-now">0</span> MPa</dd></div>
+            <div><dt>Peak at 12,000 rpm</dt><dd><span class="roll" id="fw-peak" data-digits="3" data-value="0" data-blank="1">000</span> MPa</dd></div>
+            <div><dt>Stored energy, now</dt><dd><span id="fw-energy">0.0</span> kJ</dd></div>
+            <div><dt>Mass</dt><dd><span id="fw-mass">0.00</span> kg <span class="dd-sub" id="fw-mass-d">(stock)</span></dd></div>
+            <div><dt>Rotational inertia</dt><dd><span id="fw-inertia">0.0%</span></dd></div>
+            <div><dt>Torque, I·α</dt><dd><span id="fw-torque">&mdash;</span></dd></div>
+            <div><dt>To machine</dt><dd id="fw-machining" class="readout-text">6 pockets</dd></div>
+          </dl>
+        </div>
+      </div>
+      <p class="fig-note">Model, not the team&rsquo;s FEA: an assumed steel flywheel, Ø160 mm, with an 8 mm rim wall 22 mm tall either side of a base plate, and a hub that bolts to the crank. Stress comes from rotating-disc theory plus the rim pulling on the plate, with concentration at each pocket. The trends are real physics; the numbers are only as good as the assumptions.</p>
+    </figure>
+
+    <div class="bench-foot">
+      <table class="spec-table">
+        <tbody>
+          <tr><th scope="row">Status</th><td><span class="status status--no">Not stocked <span lang="zh-Hant">不設庫存</span></span></td></tr>
+          <tr><th scope="row">Goal</th><td>Remove material to cut rotational inertia</td></tr>
+          <tr><th scope="row">Variables</th><td>Lightening pockets, base plate thickness, and how much of the rim wall could be skimmed</td></tr>
+          <tr><th scope="row">Work</th><td>Team of three. Full CAD model and FEA, presented to the captains.</td></tr>
+          <tr><th scope="row">Machining</th><td>Would have been outsourced</td></tr>
+        </tbody>
+      </table>
+      <div class="bench-foot-side">
+        <div class="disposition">
+          <span class="stamp stamp--reject" aria-hidden="true">Rejected <span lang="zh-Hant">否決</span></span>
+          <p><strong>Disposition:</strong> rejected on data. Cutting rotational inertia was real, but outsourced machining cost outweighed the gain. Knowing when not to make a part is part of the job.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Part 02-02 studs -->
+  <article class="part folder-panel" id="part-studs" role="tabpanel" aria-labelledby="ft-studs" hidden>
+    <div class="part-fig">
+      <figure class="fig torque" id="stud-torque">
+        <figcaption class="fig-cap"><span><b>Fig. 003</b> Head stud in section, from the engine&rsquo;s measured stack</span><span class="tag-ill">Dimensions measured · loads illustrative</span></figcaption>
+        <div class="torque-body">
+          <svg class="torque-svg" id="torque-svg" viewBox="0 0 128 196" role="img" aria-label="Section through the cylinder head with its counterbore and hole, head gasket, cylinder body, body gasket and the threaded crankcase, with the stud, washer and nut. Hold the button to torque the nut."></svg>
+          <div class="torque-side">
+            <div class="ctl">
+              <label class="ctl-lbl" for="tq-gasket">Head gasket, D <output class="ctl-val" id="tq-gasket-out">0.45 mm</output></label>
+              <input type="range" id="tq-gasket" min="25" max="58" value="45">
+            </div>
+            <div class="ctl">
+              <label class="ctl-lbl" for="tq-cbore">Counterbore depth, I <output class="ctl-val" id="tq-cbore-out">15.0 mm</output></label>
+              <input type="range" id="tq-cbore" min="150" max="200" step="5" value="150">
+            </div>
+            <dl class="torque-read torque-read--geo">
+              <div><dt>Grip length</dt><dd><span id="tq-grip">111.9</span> mm</dd></div>
+              <div><dt>Stud needed</dt><dd><span id="tq-len">155.4</span> mm</dd></div>
+              <div class="span2"><dt>Stud top vs head face</dt><dd id="tq-clear">1.5 mm below</dd></div>
+            </dl>
+            <svg class="torque-dial" id="torque-dial" viewBox="0 0 200 116" aria-hidden="true"></svg>
+            <dl class="torque-read">
+              <div><dt>Torque</dt><dd><span id="tq-t">0.0</span> N·m</dd></div>
+              <div><dt>Clamp load</dt><dd><span id="tq-f">0.0</span> kN</dd></div>
+              <div><dt>Stud stretch</dt><dd><span id="tq-s">0</span> µm</dd></div>
+              <div><dt>Nut turned</dt><dd><span id="tq-a">0</span>°</dd></div>
+            </dl>
+            <div class="torque-btns">
+              <button class="btn btn--zinc btn--hold" id="tq-hold" type="button"><span class="hold-fill" aria-hidden="true"></span><span id="tq-label">Hold to torque</span> <span lang="zh-Hant">按住上緊</span></button>
+              <button class="btn btn--sm" id="tq-reset" type="button">Loosen</button>
+            </div>
+          </div>
+        </div>
+        <table class="dims-table">
+          <caption class="vh">Measured dimensions</caption>
+          <tbody>
+            <tr><th scope="row"><span class="dim-tag">A</span>Counterbore Ø</th><td>20 mm</td><th scope="row"><span class="dim-tag">B</span>Head depth (excl. counterbore)</th><td>51 ± 0.1 mm</td><th scope="row"><span class="dim-tag">C</span>Hole Ø</th><td>10 ± 0.1 mm</td></tr>
+            <tr><th scope="row"><span class="dim-tag">D</span>Head gasket</th><td>0.45 mm (0.25–0.58)</td><th scope="row"><span class="dim-tag">E</span>Cylinder body depth</th><td>60.1 ± 0.1 mm</td><th scope="row"><span class="dim-tag">F</span>Body gasket</th><td>0.3 mm</td></tr>
+            <tr><th scope="row"><span class="dim-tag">G</span>Crankcase thread depth</th><td>32.7 mm</td><th scope="row"><span class="dim-tag">H</span>Thread</th><td>M9 × 1.25</td><th scope="row"><span class="dim-tag">I</span>Counterbore depth</th><td>15 mm now, 20 max</td></tr>
+          </tbody>
+        </table>
+        <p class="fig-note" id="tq-status" aria-live="polite">Hold to torque: the wrench clicks at the target. Gaskets are drawn eight times thicker so you can see them. Washer, nut height, thread engagement and the 40 N·m target are assumptions for the demo, not ARP&rsquo;s spec.</p>
+      </figure>
+
+
+    </div>
+
+    <div class="part-spec">
+      <h3 id="studs-title" class="part-title"><span class="part-no">02-02</span>Cylinder-head stud, custom <span lang="zh-Hant">定製缸蓋螺柱</span></h3>
+      <table class="spec-table">
+        <tbody>
+          <tr><th scope="row">Application</th><td>Kawasaki Ninja 400 parallel-twin, cylinder head</td></tr>
+          <tr><th scope="row">Replaces</th><td>OEM head bolts</td></tr>
+          <tr><th scope="row">Why</th><td>More accurate, repeatable clamping force. Better head-gasket sealing under high cylinder pressure.</td></tr>
+          <tr><th scope="row">Off the shelf</th><td>None. No OEM or catalogue stud existed for this engine.</td></tr>
+          <tr><th scope="row">Source</th><td>Custom part, specified and sourced from ARP (USA)</td></tr>
+          <tr><th scope="row">My role</th><td>Led the investigation, specification and supplier negotiation</td></tr>
+        </tbody>
+      </table>
+      <ol class="route" aria-label="Route card for part 02-02">
+        <li><span class="op">10</span><span class="step">Investigate bolts vs studs</span><span class="chop chop--stamp" aria-hidden="true"><span>司</span><span>徒</span></span></li>
+        <li><span class="op">20</span><span class="step">Search OEM and off-the-shelf: none exist</span><span class="chop chop--stamp" aria-hidden="true"><span>司</span><span>徒</span></span></li>
+        <li><span class="op">30</span><span class="step">Specify a custom stud with ARP</span><span class="chop chop--stamp" aria-hidden="true"><span>司</span><span>徒</span></span></li>
+        <li><span class="op">40</span><span class="step">Captain approval</span><span class="chop chop--stamp" aria-hidden="true"><span>司</span><span>徒</span></span></li>
+        <li><span class="op">50</span><span class="step">Negotiate supply through to ordering</span><span class="chop chop--stamp" aria-hidden="true"><span>司</span><span>徒</span></span></li>
+      </ol>
+      <p class="route-note">Each operation signed off with my chop <span lang="zh-Hant">印章</span>.</p>
+    </div>
+      <figure class="fig bench part-wide" id="stud-bench">
+        <figcaption class="fig-cap"><span><b>Fig. 004</b> Torque bench: clamp load at six head fasteners</span><span class="tag-ill">Illustrative model</span></figcaption>
+        <div class="bench-body">
+          <svg class="bench-plan" id="bench-plan" viewBox="0 0 360 230" role="img" aria-label="Plan view of the cylinder head showing six fasteners around two bores, numbered in tightening order."></svg>
+          <div class="bench-side">
+            <div class="seg" role="radiogroup" aria-label="Fastener type">
+              <button type="button" role="radio" aria-checked="true" data-mode="bolt">OEM bolts</button>
+              <button type="button" role="radio" aria-checked="false" data-mode="stud">Studs + nuts</button>
+            </div>
+            <div class="bench-btns">
+              <button class="btn btn--zinc" id="bench-run" type="button">Run torque sequence</button>
+              <button class="btn btn--sm" id="bench-reset" type="button">Reset</button>
+            </div>
+            <p class="bench-status" id="bench-status" aria-live="polite">Or do it yourself: click the six fasteners in order, 1 to 6.</p>
+            <div class="bench-readout is-empty" id="bench-readout">
+              <div><span class="lbl">Clamp spread, this build</span><span class="val"><span class="dash">&mdash;</span><span class="num"><span class="roll" id="bench-spread" data-digits="2" data-value="0" data-blank="1">00</span>%</span></span></div>
+              <div><span class="lbl">Builds logged</span><span class="val"><span class="dash">&mdash;</span><span class="num"><span class="roll" id="bench-count" data-digits="2" data-value="0" data-blank="1">00</span></span></span></div>
+            </div>
+            <svg class="bench-strip" id="bench-strip" viewBox="0 0 300 120" role="img" aria-label="Dot plot of clamp loads across all logged builds, bolts above and studs below."></svg>
+          </div>
+        </div>
+        <p class="fig-note">Each run draws thread friction at random. A bolt is torqued while it turns in the block, so friction scatter shows up as clamp scatter. A stud sits still while its nut is torqued, so less of it does. The numbers come from the model, not a test rig.</p>
+      </figure>
+  </article>
+  </div>
+</section>
+
+<!-- ============ 03 DATA ============ -->
+<section class="page" id="data" data-page="3" aria-labelledby="data-title">
+  <header class="page-head">
+    <span class="page-tab">03</span>
+    <h2 id="data-title">Data</h2>
+    <p class="page-meta">Imperial College data science · Python, scikit-learn · 2026</p>
+  </header>
+
+  <article class="part part--data" id="part-tree" aria-labelledby="tree-title">
+    <div class="part-spec data-spec">
+      <h3 id="tree-title" class="part-title"><span class="part-no">03-01</span>Heart-disease risk classifier <span lang="zh-Hant">心臟病風險預測</span></h3>
+      <p class="data-lede">A team of four built a decision tree in Python to flag heart-disease risk, then asked what it had actually learned. Below, the same kind of model retrains live as you change it: grow it deeper and watch it overfit, balance the classes, drop a feature, and trace the path to the riskiest patients.</p>
+      <table class="spec-table">
+        <tbody>
+          <tr><th scope="row">Team</th><td>Four, Python</td></tr>
+          <tr><th scope="row">Data</th><td>UCI heart-disease dataset</td></tr>
+          <tr><th scope="row">Model</th><td>Decision-tree classifier, scikit-learn</td></tr>
+          <tr><th scope="row">Tuning</th><td>Depth swept 1 to 15, cross-validated on accuracy, precision and recall</td></tr>
+          <tr><th scope="row">Bias control</th><td>Stratified splits and balanced class weights, correcting for sex and class imbalance</td></tr>
+          <tr><th scope="row">Output</th><td>Scripted tree-path tracing to pull out the highest-risk symptom combinations, including a &ldquo;silent&rdquo; profile with no chest pain</td></tr>
+          <tr><th scope="row">Verdict</th><td>Short of clinical-grade reliability. We recommended external validation.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <figure class="fig tree part-wide" id="tree-fig">
+      <figcaption class="fig-cap"><span><b>Fig. 005</b> Decision tree, retrained in your browser as you change it</span><span class="tag-ill">Synthetic data · real algorithm</span></figcaption>
+      <div class="ml-controls">
+        <div class="ctl">
+          <label class="ctl-lbl" for="tree-depth">Max depth <span class="roll" id="tree-depth-roll" data-digits="2" data-value="4" data-blank="1">4</span></label>
+          <input type="range" id="tree-depth" min="1" max="15" value="4">
+        </div>
+        <div class="ctl">
+          <label class="ctl-lbl" for="ml-minleaf">Min patients per leaf <span class="roll" id="ml-minleaf-roll" data-digits="2" data-value="5" data-blank="1">5</span></label>
+          <input type="range" id="ml-minleaf" min="1" max="30" value="5">
+        </div>
+        <div class="ctl">
+          <span class="ctl-lbl" id="crit-lbl">Split criterion</span>
+          <div class="seg" role="radiogroup" aria-labelledby="crit-lbl">
+            <button type="button" role="radio" aria-checked="true" data-crit="gini">Gini</button>
+            <button type="button" role="radio" aria-checked="false" data-crit="entropy">Entropy</button>
+          </div>
+        </div>
+        <div class="ctl">
+          <span class="ctl-lbl" id="cw-lbl">Class weights</span>
+          <div class="seg" role="radiogroup" aria-labelledby="cw-lbl">
+            <button type="button" role="radio" aria-checked="true" data-cw="balanced">Balanced</button>
+            <button type="button" role="radio" aria-checked="false" data-cw="none">None</button>
+          </div>
+        </div>
+        <div class="ctl">
+          <span class="ctl-lbl" id="split-lbl">Held-out test set</span>
+          <div class="seg" role="radiogroup" aria-labelledby="split-lbl">
+            <button type="button" role="radio" aria-checked="false" data-split="0.2">20%</button>
+            <button type="button" role="radio" aria-checked="true" data-split="0.3">30%</button>
+            <button type="button" role="radio" aria-checked="false" data-split="0.4">40%</button>
+          </div>
+        </div>
+        <div class="ml-actions">
+          <button class="btn" id="tree-trace" type="button" aria-pressed="false">Trace highest-risk path</button>
+          <button class="btn" id="ml-reshuffle" type="button">New random split</button>
+        </div>
+        <div class="ml-feats">
+          <span class="ctl-lbl">Features the tree may use (click to drop one)</span>
+          <div class="ml-chips" id="ml-features"></div>
+        </div>
+      </div>
+      <div class="ml-crumbs" id="ml-crumbs" aria-label="Branch you are viewing"></div>
+      <svg class="tree-svg" id="tree-svg" role="img" aria-label="Decision tree"></svg>
+      <div class="ml-out">
+        <div class="ml-metrics">
+          <p class="ml-h">On held-out patients</p>
+          <dl>
+            <div><dt>Accuracy</dt><dd><span class="roll" id="ml-acc" data-digits="3" data-blank="1">0</span>%</dd></div>
+            <div><dt>Recall</dt><dd><span class="roll" id="ml-rec" data-digits="3" data-blank="1">0</span>%</dd></div>
+            <div><dt>Precision</dt><dd><span class="roll" id="ml-prec" data-digits="3" data-blank="1">0</span>%</dd></div>
+            <div><dt>Specificity</dt><dd><span class="roll" id="ml-spec" data-digits="3" data-blank="1">0</span>%</dd></div>
+          </dl>
+          <p class="ml-small">Training accuracy <b id="ml-train">0%</b> · <span id="ml-leaves"></span></p>
+        </div>
+        <div class="ml-cm"><p class="ml-h">Confusion matrix</p><svg id="ml-cm" viewBox="0 0 264 150" role="img" aria-label="Confusion matrix of predicted against actual on the test patients"></svg></div>
+        <div class="ml-curve"><p class="ml-h">Accuracy against depth</p><svg class="tree-curve" id="tree-curve" viewBox="0 0 300 150" role="img" aria-label="Training accuracy keeps rising with depth while cross-validated accuracy peaks then falls."></svg></div>
+        <div class="ml-imp"><p class="ml-h">What it splits on most</p><div id="ml-imp"></div></div>
+      </div>
+      <p class="fig-note" id="tree-note">Training…</p>
+      <p class="fig-note">The project used the real UCI data. To retrain live without shipping patient records, this figure uses 303 synthetic patients drawn to resemble that dataset, with the same 13 features. The algorithm, the splits and the scores are computed for real.</p>
+    </figure>
+  </article>
+</section>
+
+<!-- ============ 04 DESIGN ============ -->
+<section class="page" id="design" data-page="4" aria-labelledby="design-title">
+  <header class="page-head">
+    <span class="page-tab">04</span>
+    <h2 id="design-title">Design</h2>
+    <p class="page-meta">Human-centred Design Engineering, Year 1 · Team project · Jan – Jun 2026</p>
+  </header>
+
+  <article class="part part--hcd" id="part-hcd" aria-labelledby="hcd-title">
+    <div class="part-spec">
+      <h3 id="hcd-title" class="part-title"><span class="part-no">04-01</span>The Canvas: a pixel wall for Queen&rsquo;s Lawn <span lang="zh-Hant">像素畫牆</span></h3>
+      <p class="data-lede">The brief: find out how moving through campus affects students&rsquo; stress, then design something that helps. The research kept pointing the same way. Students struggle to switch off from work, unwind through exercise and other people, and lose patience at card-reader doors. Our answer was a shared pixel wall on Queen&rsquo;s Lawn: tap your college card, place a few pixels, and step out of work mode for a minute, together.</p>
+      <table class="spec-table">
+        <tbody>
+          <tr><th scope="row">Question</th><td>How does movement through campus affect stress?</td></tr>
+          <tr><th scope="row">Research</th><td>Nine interviews on a campus map; a &ldquo;what&rsquo;s on your mind?&rdquo; sticky-note board, where 40% of answers were about school or work; library headcounts of 513 and 462 students</td></tr>
+          <tr><th scope="row">How might we</th><td>Bring play into moving around campus; separate work and break spaces; take the friction out of access points</td></tr>
+          <tr><th scope="row">Ideation</th><td>34 thumbnail sketches, cut to 12 concepts, scored on effectiveness, feasibility, viability and endurance, leaving three</td></tr>
+          <tr><th scope="row">Co-design</th><td>Generative interviews with two Year 1 students on low-fi prototypes. They asked for physical taps over phones, a refill timer that nudges you to take a break, and regular clear-outs</td></tr>
+          <tr><th scope="row">Prototypes</th><td>Fusion 360 renders; a web canvas with a five-pixel limit per turn; an ESP32 breadboard rig of buttons and LEDs for tactile pixels</td></tr>
+          <tr><th scope="row">Decisions</th><td>Touch over a controller; pixel size chosen in user tests; light diffusion from observation; the college ID card as the safeguard, over face, fingerprint or phone</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <figure class="fig hcd-fig part-wide" id="hcd-fig">
+      <figcaption class="fig-cap"><span><b>Fig. 006</b> The Canvas, playable <span lang="zh-Hant">像素畫牆</span></span><span class="fig-hint" id="hcd-hint">Tap your card, then click or drag on the wall</span></figcaption>
+      <div class="hcd-wall"><canvas id="hcd-canvas" tabindex="0" role="application" aria-label="A shared pixel wall. Tap your card for five pixels, then click cells to place them. Arrow keys move the cursor, Space places a pixel, T taps your card." aria-describedby="hcd-hint"></canvas></div>
+      <div class="hcd-controls">
+        <button class="btn btn--zinc" type="button" id="hcd-tap"><svg viewBox="0 0 24 24" class="hcd-card-ico" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="6" y="9" width="5" height="4" fill="currentColor"/><path d="M14 10h4M14 13h3" stroke="currentColor" stroke-width="1.6"/></svg><span id="hcd-tap-label">Tap your card</span></button>
+        <p class="hcd-left">Pixels left <span class="roll" id="hcd-left" data-digits="1" data-value="0">0</span><span class="hcd-dots" id="hcd-dots" aria-hidden="true"></span></p>
+        <div class="seg seg--sm" role="radiogroup" aria-label="Ink">
+          <button type="button" role="radio" aria-checked="true" data-tone="1">Ink</button>
+          <button type="button" role="radio" aria-checked="false" data-tone="2">Dots</button>
+          <button type="button" role="radio" aria-checked="false" data-tone="3">Light</button>
+          <button type="button" role="radio" aria-checked="false" data-tone="4">Yellow</button>
+          <button type="button" role="radio" aria-checked="false" data-tone="0">Erase</button>
+        </div>
+        <span class="hcd-status" id="hcd-status" aria-live="polite">Tap your card to get five pixels.</span>
+      </div>
+      <p class="fig-note">The wall starts with pixel art that students drew on our web prototype during testing, redrawn in this catalogue&rsquo;s inks. The rules are the prototype&rsquo;s: five pixels a tap, erasing costs one, recolouring is free, and after your five there&rsquo;s a short break before the next tap, the refill timer a co-design participant asked for. Your pixels stay in this browser.</p>
+    </figure>
+  </article>
+
+  <div class="hcd-files folders" data-folders aria-label="HCD project files">
+    <div class="folder-tabs" role="tablist" aria-label="HCD project files">
+      <button class="folder-tab" type="button" role="tab" id="hf-res" aria-controls="hp-res" aria-selected="true"><span class="ft-kind">File 01 · findings</span><span class="ft-name">Research</span></button>
+      <button class="folder-tab" type="button" role="tab" id="hf-ideas" aria-controls="hp-ideas" aria-selected="false" tabindex="-1"><span class="ft-kind">File 02 · 4 sketches</span><span class="ft-name">Early ideas</span></button>
+      <button class="folder-tab" type="button" role="tab" id="hf-con" aria-controls="hp-con" aria-selected="false" tabindex="-1"><span class="ft-kind">File 03 · 3 concepts</span><span class="ft-name">Concepts</span></button>
+      <button class="folder-tab" type="button" role="tab" id="hf-proto" aria-controls="hp-proto" aria-selected="false" tabindex="-1"><span class="ft-kind">File 04 · 4 photos</span><span class="ft-name">Prototypes</span></button>
+      <button class="folder-tab" type="button" role="tab" id="hf-eval" aria-controls="hp-eval" aria-selected="false" tabindex="-1"><span class="ft-kind">File 05 · renders, scores</span><span class="ft-name">Evaluation</span></button>
+    </div>
+
+    <div class="folder-panel rc-panel" id="hp-res" role="tabpanel" aria-labelledby="hf-res">
+      <figure class="fig rc-g rc-print">
+        <img src="assets/hcd/hcd-library-comic.jpg" alt="Comic panel titled Library isolation: a student sits alone scrolling on a phone between bookshelves while two others walk past. Caption: Scrolling alone, the stress remains." loading="lazy" width="900" height="1612">
+        <figcaption class="fig-cap"><span><b>Fig. 006a</b> Library isolation: the break that isn&rsquo;t one</span></figcaption>
+      </figure>
+      <div class="rc-note-card">
+        <p class="rc-note-h">What we found</p>
+        <ul>
+          <li>Ironically, students often did the things that stressed them while trying to relax, and talked about deadlines on their breaks.</li>
+          <li>40% of anonymous sticky notes on &ldquo;what&rsquo;s on your mind?&rdquo; were about school or work.</li>
+          <li>In the library, 18% of 513 students were on a break in one count; 22% of 462 were on their phones in the other.</li>
+          <li>Access points grate. One interviewee taps his card three times cutting through one building, and his ice-hockey bag gets clamped by a stiff self-closing door at another.</li>
+          <li>Undergraduates avoid wearing lanyards, so cards live in wallets and come out mid-journey.</li>
+        </ul>
+        <p class="rc-note-h hcd-note-gap">Honest about the data</p>
+        <p>It&rsquo;s biased: people in a rush rarely stopped, and we sampled one walkway at one time of day.</p>
+      </div>
+    </div>
+
+    <div class="folder-panel rc-panel rc-panel--4" id="hp-ideas" role="tabpanel" aria-labelledby="hf-ideas" hidden>
+      <figure class="fig rc-g rc-print"><img src="assets/hcd/hcd-sketch-nfc.jpg" alt="Sketch: an NFC pad in the floor in front of a door, read as people walk over it." loading="lazy" width="900" height="761"><figcaption class="fig-cap"><span><b>Fig. 006b</b> Floor NFC pad</span></figcaption></figure>
+      <figure class="fig rc-g rc-print"><img src="assets/hcd/hcd-sketch-wrist.jpg" alt="Sketch: a wrist tag read by a reader above a door as the hand approaches." loading="lazy" width="900" height="628"><figcaption class="fig-cap"><span><b>Fig. 006c</b> Wrist tag</span></figcaption></figure>
+      <figure class="fig rc-g rc-print"><img src="assets/hcd/hcd-sketch-qr.jpg" alt="Sketch: a QR code worn on clothing, scanned by a camera at a door." loading="lazy" width="900" height="834"><figcaption class="fig-cap"><span><b>Fig. 006d</b> Code on clothing</span></figcaption></figure>
+      <figure class="fig rc-g rc-print"><img src="assets/hcd/hcd-sketch-door.jpg" alt="Sketch: a door display that greets a student with a silly fact: You are 43% shorter than average." loading="lazy" width="900" height="499"><figcaption class="fig-cap"><span><b>Fig. 006e</b> A door with a sense of humour</span></figcaption></figure>
+    </div>
+
+    <div class="folder-panel rc-panel" id="hp-con" role="tabpanel" aria-labelledby="hf-con" hidden>
+      <figure class="fig rc-g rc-print"><img src="assets/hcd/hcd-concept-canvas.jpg" alt="Concept sketch: students tapping pixels on a large grid wall in a courtyard to make flags together." loading="lazy" width="469" height="332"><figcaption class="fig-cap"><span><b>Fig. 006f</b> Collaborative drawing display</span></figcaption></figure>
+      <figure class="fig rc-g rc-print"><img src="assets/hcd/hcd-concept-buttons.jpg" alt="Concept sketch: a door release panel with two buttons either side of a screen showing a silly question to vote on." loading="lazy" width="466" height="304"><figcaption class="fig-cap"><span><b>Fig. 006g</b> Gamified access buttons</span></figcaption></figure>
+      <div class="rc-note-card">
+        <p class="rc-note-h">The three that survived the scoring</p>
+        <ul>
+          <li><b>Gamified access buttons:</b> two door-release buttons that also vote on a facetious question, so opening a door takes your mind off work.</li>
+          <li><b>Camera portals:</b> two spots on campus linked by live video and sound, to break down social barriers.</li>
+          <li><b>Collaborative drawing display:</b> a wall of pixels you change by tapping, so people make things together. This one became The Canvas.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="folder-panel rc-panel rc-panel--4" id="hp-proto" role="tabpanel" aria-labelledby="hf-proto" hidden>
+      <figure class="fig rc-g rc-print"><img src="assets/hcd/hcd-esp-1.jpg" alt="ESP32 breadboard prototype: a row of push buttons, each lighting a yellow LED above it." loading="lazy" width="1000" height="962"><figcaption class="fig-cap"><span><b>Fig. 006h</b> ESP32 rig: a button per pixel</span></figcaption></figure>
+      <figure class="fig rc-g rc-print"><img src="assets/hcd/hcd-esp-2.jpg" alt="Close-up of the ESP32 prototype with LEDs and buttons wired on a breadboard." loading="lazy" width="1000" height="962"><figcaption class="fig-cap"><span><b>Fig. 006i</b> Testing the tactile press</span></figcaption></figure>
+      <figure class="fig rc-g rc-print"><img src="assets/hcd/hcd-test-canvas-1.jpg" alt="A pixel canvas from user testing, scattered with small drawings, letters and shapes made by students." loading="lazy" width="1100" height="772"><figcaption class="fig-cap"><span><b>Fig. 006j</b> A canvas students drew in testing</span></figcaption></figure>
+      <figure class="fig rc-g rc-print"><img src="assets/hcd/hcd-test-canvas-2.jpg" alt="A second test canvas, denser, with letters, flags and patterns." loading="lazy" width="1100" height="790"><figcaption class="fig-cap"><span><b>Fig. 006k</b> And another</span></figcaption></figure>
+    </div>
+
+    <div class="folder-panel rc-panel" id="hp-eval" role="tabpanel" aria-labelledby="hf-eval" hidden>
+      <figure class="fig rc-g rc-print hcd-wide"><img src="assets/hcd/hcd-render-march.jpg" alt="Render of the pixel wall on Queen's Lawn in front of the library and Sherfield Building, covered in detailed pixel art." loading="lazy" width="1400" height="620"><figcaption class="fig-cap"><span><b>Fig. 006l</b> March render, Fusion 360: the wall on Queen&rsquo;s Lawn</span></figcaption></figure>
+      <figure class="fig rc-g rc-print hcd-wide"><img src="assets/hcd/hcd-render-canvas.jpg" alt="The same view with the wall showing the real canvas students drew during testing." loading="lazy" width="1400" height="620"><figcaption class="fig-cap"><span><b>Fig. 006m</b> May render, with the art students actually made</span></figcaption></figure>
+      <figure class="fig rc-g rc-print"><img src="assets/hcd/hcd-decisions.jpg" alt="Decision diagram: digital, control, tolerance, diffusion and safeguards, each with options and the chosen one highlighted, labelled by whether it came from user feedback, observation or discussion." loading="lazy" width="410" height="608"><figcaption class="fig-cap"><span><b>Fig. 006n</b> Five decisions, and where each came from</span></figcaption></figure>
+      <div class="hcd-radars">
+        <figure class="fig rc-g rc-print"><img src="assets/hcd/hcd-radar-canvas.jpg" alt="Radar chart for The Canvas across stress reduction, help take breaks, reduce frustration, shift mindset from work, complexity and novelty." loading="lazy" width="553" height="423"><figcaption class="fig-cap"><span><b>Fig. 006o</b> The Canvas</span></figcaption></figure>
+        <figure class="fig rc-g rc-print"><img src="assets/hcd/hcd-radar-portal.jpg" alt="Radar chart for the camera portals on the same six criteria." loading="lazy" width="527" height="401"><figcaption class="fig-cap"><span><b>Fig. 006p</b> Portals</span></figcaption></figure>
+        <figure class="fig rc-g rc-print"><img src="assets/hcd/hcd-radar-buttons.jpg" alt="Radar chart for the gamified access buttons on the same six criteria." loading="lazy" width="531" height="391"><figcaption class="fig-cap"><span><b>Fig. 006q</b> Access buttons</span></figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 TEST TRACK ============ -->
+<section class="page" id="track" data-page="5" aria-labelledby="track-title">
+  <header class="page-head">
+    <span class="page-tab">05</span>
+    <h2 id="track-title">Test track</h2>
+    <p class="page-meta">RC car, Electronics 1, 2026 · Lap-time forecaster in R, 2026 – present</p>
+  </header>
+
+  <figure class="fig track-fig" id="track-fig">
+    <figcaption class="fig-cap"><span><b>Fig. 007</b> Circuit de Monaco, in 3D <span lang="zh-Hant">摩納哥賽道</span></span><span class="fig-hint" id="track-hint">Click the track · WASD or arrows · Space handbrake · P shift up · I shift down · C camera · R reset · G grid start</span></figcaption>
+    <div class="track-wrap">
+      <div class="track-stage" id="track-stage">
+        <canvas id="track-canvas" tabindex="0" role="application" aria-label="3D driving game of the RC car on a harbour street circuit. The first drive starts from the grid with five red start lights. W A S D or arrow keys to drive, P to shift up and I to shift down, Space for handbrake, C to switch camera, R to reset, G to go back to the grid for another start, Escape to let go of the wheel." aria-describedby="track-hint"></canvas>
+        <div class="track-hud" id="track-hud" aria-hidden="true">Lap 0 · Now 0.00 · Best --.--</div>
+        <div class="track-speed" id="track-speed" aria-hidden="true"><b>0</b>km/h</div>
+        <div class="track-fpv" id="track-fpv" aria-hidden="true"><span>ESP32-CAM · 320×240 · Wi-Fi</span><span class="rec">● REC</span></div>
+        <button class="btn btn--zinc btn--lg track-cta" id="track-cta" type="button">
+          <span id="track-cta-main">Click to take the wheel</span>
+          <span class="track-cta-sub" id="track-cta-sub">WASD or arrows · P up, I down to shift · C camera</span>
+        </button>
+      </div>
+      <div class="track-pads" id="track-pads" aria-hidden="true">
+        <button type="button" data-key="left" aria-label="Steer left"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></button>
+        <button type="button" data-key="right" aria-label="Steer right"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></button>
+        <span class="pad-gap"></span>
+        <button type="button" data-key="hand" aria-label="Handbrake"><svg viewBox="0 0 24 24"><path d="M6 12h12" stroke="currentColor" stroke-width="3"/></svg></button>
+        <button type="button" data-key="down" aria-label="Brake"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" fill="currentColor"/></svg></button>
+        <button type="button" data-key="up" class="pad-gas" aria-label="Throttle"><svg viewBox="0 0 24 24"><path d="M5 15l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></button>
+      </div>
+    </div>
+    <div class="track-setup">
+      <div class="ctl">
+        <span class="ctl-lbl" id="preset-lbl">Set-up</span>
+        <div class="seg" role="radiogroup" aria-labelledby="preset-lbl">
+          <button type="button" role="radio" aria-checked="true" data-preset="grip">Grip</button>
+          <button type="button" role="radio" aria-checked="false" data-preset="drift">Drift</button>
+          <button type="button" role="radio" aria-checked="false" data-preset="custom">Custom</button>
+        </div>
+      </div>
+      <div class="ctl">
+        <span class="ctl-lbl" id="cam-lbl">Camera</span>
+        <div class="seg" role="radiogroup" aria-labelledby="cam-lbl">
+          <button type="button" role="radio" aria-checked="true" data-cam="chase">Chase</button>
+          <button type="button" role="radio" aria-checked="false" data-cam="cockpit">Cockpit</button>
+          <button type="button" role="radio" aria-checked="false" data-cam="esp32">ESP32-CAM</button>
+        </div>
+      </div>
+      <div class="ctl">
+        <label class="ctl-lbl" for="rc-grip">Tyre grip <output class="ctl-val" id="rc-grip-out">1.15 μ</output></label>
+        <input type="range" id="rc-grip" min="60" max="140" value="115">
+      </div>
+      <div class="ctl">
+        <label class="ctl-lbl" for="rc-weight">Weight on front axle <output class="ctl-val" id="rc-weight-out">45%</output></label>
+        <input type="range" id="rc-weight" min="30" max="65" value="45">
+      </div>
+      <div class="ctl">
+        <span class="ctl-lbl" id="wing-lbl">Rear spoiler</span>
+        <div class="seg" role="radiogroup" aria-labelledby="wing-lbl">
+          <button type="button" role="radio" aria-checked="true" data-wing="on">On</button>
+          <button type="button" role="radio" aria-checked="false" data-wing="off">Off</button>
+        </div>
+      </div>
+      <div class="ctl">
+        <span class="ctl-lbl" id="gearbox-lbl">Gearbox (manual: P up, I down)</span>
+        <div class="seg" role="radiogroup" aria-labelledby="gearbox-lbl">
+          <button type="button" role="radio" aria-checked="true" data-gearbox="auto">Auto</button>
+          <button type="button" role="radio" aria-checked="false" data-gearbox="manual">Manual</button>
+        </div>
+      </div>
+      <div class="ctl">
+        <span class="ctl-lbl" id="engine-lbl">Engine note</span>
+        <div class="seg" role="radiogroup" aria-labelledby="engine-lbl">
+          <button type="button" role="radio" aria-checked="true" data-engine="rec">Real F1 V10</button>
+          <button type="button" role="radio" aria-checked="false" data-engine="synth">Synthesised</button>
+        </div>
+      </div>
+      <div class="ctl">
+        <span class="ctl-lbl" id="tsound-lbl">Sound</span>
+        <div class="seg" role="radiogroup" aria-labelledby="tsound-lbl">
+          <button type="button" role="radio" aria-checked="true" data-tsound="on">On</button>
+          <button type="button" role="radio" aria-checked="false" data-tsound="off">Off</button>
+        </div>
+      </div>
+      <p class="track-setup-note" id="rc-note" aria-live="polite">Grip set-up: rubber tyres, traction control, spoiler on.</p>
+    </div>
+    <p class="fig-note"><span class="tag-ill">Illustrative model</span> The handling is a bicycle model with load-sensitive tyres, tuned to feel like the car, not data logged from it; the engine note is a real recording of a 2005 Red Bull-Cosworth RB1 V10 revving at the Goodwood Festival of Speed, by Edvvc (<a href="https://commons.wikimedia.org/wiki/File:Red_Bull-Cosworth_RB1_(2005).ogg" rel="noopener" target="_blank">CC BY-SA 3.0, Wikimedia Commons</a>), looped and pitched to the car&rsquo;s revs through an eight-speed sequential box, for fun. Switch to the synthesised engine if it cannot load. The camera, the wing and the weight slider mirror what we actually tried. Circuit layout from the open f1-circuits GeoJSON (MIT), scaled down; the scenery is invented.</p>
+  </figure>
+
+  <div class="track-below">
+    <article class="part-mini rc-story" aria-labelledby="rc-title">
+      <h3 id="rc-title" class="part-title part-title--sm"><span class="part-no">05-01</span>RC car &ldquo;Grand Prix&rdquo; <span lang="zh-Hant">遙控車大獎賽</span></h3>
+      <p>Designed, built and raced in a competitive Year 1 Electronics assessment: circuits, sensors and mechatronics in one small car. The car in the game above is modelled on it.</p>
+      <table class="spec-table">
+        <tbody>
+          <tr><th scope="row">Brain</th><td>ESP32 board with an OLED screen, driving a dual H-bridge motor driver</td></tr>
+          <tr><th scope="row">Drive and steer</th><td>Yellow gear motors on the rear, a micro servo steering the front</td></tr>
+          <tr><th scope="row">Control</th><td>First from a laptop on WASD, then from a tablet web controller</td></tr>
+          <tr><th scope="row">Budget FPV</th><td>We tried first-person driving on a budget: an ESP32-CAM on a printed mast, streaming to a browser</td></tr>
+          <tr><th scope="row">Handling</th><td>A drift-car approach, tuning weight distribution to control the slide</td></tr>
+          <tr><th scope="row">Aero</th><td>Added a rear spoiler, and a front wing to match</td></tr>
+          <tr><th scope="row">Chassis</th><td>3D-printed body and mounts</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <article class="part-mini laps" aria-labelledby="lap-title">
+      <h3 id="lap-title" class="part-title part-title--sm"><span class="part-no">05-02</span>Lap-time forecaster <span lang="zh-Hant">圈速預測</span></h3>
+      <p><span class="status">In progress <span lang="zh-Hant">開發中</span></span></p>
+      <p>A time-series model in R that forecasts lap times, built with methods from two Imperial ML summer courses. My first independent R project. Below, a small Holt smoothing model in the browser forecasts your next lap from the ones you just drove.</p>
+      <table class="lap-table" id="lap-table">
+        <thead><tr><th scope="col">Lap</th><th scope="col">Time</th><th scope="col">Forecast</th><th scope="col">Error</th></tr></thead>
+        <tbody><tr class="lap-empty"><td colspan="4">No laps yet. Cross the line twice to get a forecast.</td></tr></tbody>
+      </table>
+      <p class="forecast" id="forecast" aria-live="polite">Next lap forecast: <b>waiting for two laps</b></p>
+    </article>
+  </div>
+
+  <div class="rc-files folders" data-folders aria-label="Build photos and video, filed by topic">
+    <div class="folder-tabs" role="tablist" aria-label="RC car build files">
+      <button class="folder-tab" type="button" role="tab" id="rf-final" aria-controls="rp-final" aria-selected="true"><span class="ft-kind">File 01 · 1 photo</span><span class="ft-name">Final build</span></button>
+      <button class="folder-tab" type="button" role="tab" id="rf-fpv" aria-controls="rp-fpv" aria-selected="false" tabindex="-1"><span class="ft-kind">File 02 · 3 screenshots</span><span class="ft-name">FPV camera</span></button>
+      <button class="folder-tab" type="button" role="tab" id="rf-ctl" aria-controls="rp-ctl" aria-selected="false" tabindex="-1"><span class="ft-kind">File 03 · photo + video</span><span class="ft-name">Controls</span></button>
+      <button class="folder-tab" type="button" role="tab" id="rf-proto" aria-controls="rp-proto" aria-selected="false" tabindex="-1"><span class="ft-kind">File 04 · 2 photos</span><span class="ft-name">Prototypes</span></button>
+      <button class="folder-tab" type="button" role="tab" id="rf-elec" aria-controls="rp-elec" aria-selected="false" tabindex="-1"><span class="ft-kind">File 05 · 2 photos</span><span class="ft-name">Electronics</span></button>
+    </div>
+    <div class="folder-panel rc-panel" id="rp-final" role="tabpanel" aria-labelledby="rf-final">
+      <figure class="fig rc-g rc-print rc-print--big">
+        <img src="assets/rc/rc-final.jpg" alt="The finished RC car: 3D-printed black chassis, rear spoiler and front wing, yellow wheels, an ESP32-CAM on a mast and the ESP32 board with its OLED screen." loading="lazy" width="1200" height="1194">
+        <figcaption class="fig-cap"><span><b>Fig. 007a</b> The finished car</span></figcaption>
+      </figure>
+      <div class="rc-note-card">
+        <p class="rc-note-h">What's in the photo</p>
+        <ul>
+          <li><b>Rear spoiler</b> on two struts, added for rear grip at speed</li>
+          <li><b>Front wing</b> to balance it</li>
+          <li><b>ESP32-CAM</b> in a printed holder on a mast: the budget FPV camera</li>
+          <li><b>ESP32 board with OLED</b> on top of the electronics box</li>
+          <li>Yellow <b>TT gear motors</b> driving the rear; narrow hard rings on the front wheels for the drift set-up</li>
+        </ul>
+      </div>
+    </div>
+    <div class="folder-panel rc-panel rc-panel--4" id="rp-fpv" role="tabpanel" aria-labelledby="rf-fpv" hidden>
+      <figure class="fig rc-g rc-print">
+        <img src="assets/rc/rc-fpv-1.jpg" alt="Grainy ESP32-CAM frame: a yellow 3D-printed part against a dark ceiling." loading="lazy" width="640" height="479">
+        <figcaption class="fig-cap"><span><b>Fig. 007b</b> First frames over Wi-Fi</span></figcaption>
+      </figure>
+      <figure class="fig rc-g rc-print">
+        <img src="assets/rc/rc-fpv-2.jpg" alt="ESP32-CAM frame panning across the bench: wires, a laptop and its screen, slightly blurred." loading="lazy" width="640" height="479">
+        <figcaption class="fig-cap"><span><b>Fig. 007c</b> Panning across the bench</span></figcaption>
+      </figure>
+      <figure class="fig rc-g rc-print">
+        <img src="assets/rc/rc-fpv-3.jpg" alt="The camera pointed at the tablet that shows its own live feed, so the picture repeats inside itself." loading="lazy" width="640" height="479">
+        <figcaption class="fig-cap"><span><b>Fig. 007d</b> Pointed at its own feed</span></figcaption>
+      </figure>
+      <div class="rc-note-card">
+        <p class="rc-note-h">Why a budget camera</p>
+        <p>We tried first-person driving with the cheapest camera that could stream: an ESP32-CAM serving video over Wi-Fi to a browser. It worked, with low resolution and some lag. Pointed at the tablet showing its own feed, the picture repeats inside itself, each copy a little late. The ESP32-CAM view in the game above imitates it.</p>
+      </div>
+    </div>
+    <div class="folder-panel rc-panel" id="rp-ctl" role="tabpanel" aria-labelledby="rf-ctl" hidden>
+      <figure class="fig rc-g rc-print">
+        <img src="assets/rc/rc-wasd-test.jpg" alt="Early bench test: ESP32 board, motor driver, 9 V battery, servo and gear motors, with WASD highlighted on the laptop keyboard." loading="lazy" width="900" height="1083">
+        <figcaption class="fig-cap"><span><b>Fig. 007e</b> First test, driven on WASD</span></figcaption>
+      </figure>
+      <figure class="fig rc-g rc-print">
+        <video class="rc-tall" src="assets/rc/rc-tablet-control.mp4#t=2" controls muted playsinline preload="none" aria-label="Driving the car from a tablet web controller"></video>
+        <figcaption class="fig-cap"><span><b>Fig. 007f</b> Then from a tablet controller</span></figcaption>
+      </figure>
+    </div>
+    <div class="folder-panel rc-panel" id="rp-proto" role="tabpanel" aria-labelledby="rf-proto" hidden>
+      <figure class="fig rc-g rc-print">
+        <img src="assets/rc/rc-breadboard-chassis.jpg" alt="Prototype chassis carrying a breadboard with the ESP32 and motor driver over four wheels." loading="lazy" width="900" height="1250">
+        <figcaption class="fig-cap"><span><b>Fig. 007g</b> Breadboard prototype on wheels</span></figcaption>
+      </figure>
+      <figure class="fig rc-g rc-print">
+        <img src="assets/rc/rc-motor-test.jpg" alt="Gear motor and wheels wired to the motor driver for a bench test." loading="lazy" width="900" height="1125">
+        <figcaption class="fig-cap"><span><b>Fig. 007h</b> Motor bench test</span></figcaption>
+      </figure>
+    </div>
+    <div class="folder-panel rc-panel" id="rp-elec" role="tabpanel" aria-labelledby="rf-elec" hidden>
+      <figure class="fig rc-g rc-print">
+        <img src="assets/rc/rc-electronics.jpg" alt="ESP32 board with OLED screen and a dual motor driver wired on a breadboard." loading="lazy" width="1000" height="761">
+        <figcaption class="fig-cap"><span><b>Fig. 007i</b> ESP32 and motor driver</span></figcaption>
+      </figure>
+      <figure class="fig rc-g rc-print">
+        <img src="assets/rc/rc-spring-wire.jpg" alt="Steel wire held over the bench, with a box of extension springs and the ESP32 on a breadboard." loading="lazy" width="800" height="1259">
+        <figcaption class="fig-cap"><span><b>Fig. 007j</b> Wire and springs on the bench</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 RECORD ============ -->
+<section class="page" id="record" data-page="6" aria-labelledby="record-title">
+  <header class="page-head">
+    <span class="page-tab">06</span>
+    <h2 id="record-title">Service record</h2>
+    <p class="page-meta">Bill of materials, newest first. Open a row for detail.</p>
+  </header>
+
+  <div class="bom" role="table" aria-label="Education and experience">
+    <div class="bom-head" role="row">
+      <span role="columnheader">Item</span><span role="columnheader">Role</span><span role="columnheader">Organisation</span><span role="columnheader">Place</span><span role="columnheader">Dates</span>
+    </div>
+    <details class="bom-row" id="rec-imperial" open>
+      <summary role="row"><span role="cell" class="mono">01</span><span role="cell">MEng Design Engineering</span><span role="cell">Imperial College London, Dyson School</span><span role="cell">London</span><span role="cell" class="mono">2025 – 2029</span></summary>
+      <div class="bom-detail">
+        <p>Year 1: highest module mark 79% in Materials and Manufacturing. Year 2 (2026–27): Solid Mechanics 2, Finite Element Analysis, Thermofluids, Electronics 2 (Signals, Systems &amp; Control), Physical Computing, Computing 2: Applications, Product Design Engineering, Sustainable Design Engineering. Six-month industry placement in Year 3.</p>
+        <p class="certs"><span class="cert">IMechE</span><span class="cert">IET</span><span class="cert">IED</span> Accredited programme</p>
+      </div>
+    </details>
+    <details class="bom-row" id="rec-ml">
+      <summary role="row"><span role="cell" class="mono">02</span><span role="cell">ML summer schools, two courses</span><span role="cell">Imperial College London</span><span role="cell">London</span><span role="cell" class="mono">Jun – Jul 2026</span></summary>
+      <div class="bom-detail"><p>Introduction to Modern Machine Learning (June 2026). Machine Learning and Statistics for Time Series Analysis (July 2026). The second one feeds straight into part 04-02.</p></div>
+    </details>
+    <details class="bom-row" id="rec-ifr">
+      <summary role="row"><span role="cell" class="mono">03</span><span role="cell">Engine team member</span><span role="cell">Imperial Formula Racing (Formula Student)</span><span role="cell">London</span><span role="cell" class="mono">2025 – 2026</span></summary>
+      <div class="bom-detail"><p>Flywheel lightweighting (part 02-01) and cylinder-head studs (part 02-02) on the Kawasaki Ninja 400 engine. CAD, FEA and supplier sourcing for a four-stroke race engine.</p></div>
+    </details>
+    <details class="bom-row" id="rec-alevel">
+      <summary role="row"><span role="cell" class="mono">04</span><span role="cell">A Levels</span><span role="cell">St John&rsquo;s College</span><span role="cell">Cardiff</span><span role="cell" class="mono">2025</span></summary>
+      <div class="bom-detail"><p class="grades"><span><b>A*</b> Mathematics</span><span><b>A*</b> Further Mathematics</span><span><b>A</b> Physics</span><span><b>A</b> Design &amp; Technology</span></p></div>
+    </details>
+    <details class="bom-row" id="rec-anker">
+      <summary role="row"><span role="cell" class="mono">05</span><span role="cell">Warehouse operative, part-time</span><span role="cell">Anker Innovations</span><span role="cell">Cardiff</span><span role="cell" class="mono">2024 – now</span></summary>
+      <div class="bom-detail"><p>Inbound and outbound logistics and stock control against pick-rate targets, on safe manual-handling procedures where small errors cascade across the site. I report to the China-based head office across a time-zone gap, so every update has to be complete first time.</p></div>
+    </details>
+    <details class="bom-row" id="rec-panasonic">
+      <summary role="row"><span role="cell" class="mono">06</span><span role="cell">Engineering trainee, cohort lead</span><span role="cell">Panasonic</span><span role="cell">Cardiff</span><span role="cell" class="mono">Jun 2024</span></summary>
+      <div class="bom-detail"><p>Nominated team lead of the trainee cohort. Led the design, CAD prototyping and pitch of a weather and environment monitor for several customer segments, fixed design flaws through iteration, and presented to management.</p></div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ 07 OFF-SPEC ============ -->
+<section class="page" id="offspec" data-page="7" aria-labelledby="off-title">
+  <header class="page-head">
+    <span class="page-tab">07</span>
+    <h2 id="off-title">Off-spec</h2>
+    <p class="page-meta">Non-standard parts. Not load-bearing on a CV, load-bearing everywhere else.</p>
+  </header>
+
+  <div class="off-grid">
+    <article class="off-piano" aria-labelledby="piano-title">
+      <h3 id="piano-title" class="part-title part-title--sm"><span class="part-no">07-01</span>Piano, ARSM diploma <span lang="zh-Hant">鋼琴</span></h3>
+      <p>ABRSM Associate diploma in performance. I also play for my church.</p>
+      <div class="fav-piece">
+        <p class="fav-h">One of my favourite pieces to play</p>
+        <p class="fav-t">Liszt, Liebestraum No. 3 in A&#9837; major, S. 541 <span lang="zh-Hant">愛之夢</span></p>
+        <p>Published in 1850, it began as a song: Liszt set Freiligrath&rsquo;s poem <i>O lieb, so lang du lieben kannst</i>, &ldquo;love, as long as you can love&rdquo;. In the piano version the melody sits in the middle of the texture, passed between the thumbs while both hands share the rippling accompaniment around it, and it twice breaks into a cadenza before the theme comes home.</p>
+      </div>
+      <figure class="fig off-fig" id="piano-fig">
+        <figcaption class="fig-cap"><span><b>Fig. 008</b> <span id="piano-range">Keyboard, C4 to B5</span></span><span class="fig-hint">Click the keys, or focus and type</span></figcaption>
+        <div class="piano-scroll" id="piano-scroll"><div class="piano" id="piano" role="group" aria-label="Playable piano keyboard" tabindex="0"></div></div>
+        <div class="piano-controls">
+          <button class="btn btn--zinc" type="button" id="piano-demo"><svg class="demo-ico" viewBox="0 0 16 16" aria-hidden="true"><path id="piano-demo-ico" d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg><span id="piano-demo-label">Play Liebestraum No. 3</span></button>
+          <button class="btn" type="button" id="piano-size" aria-pressed="false">Bigger keyboard</button>
+          <div class="piano-seek">
+            <input type="range" id="piano-progress" min="0" max="1000" value="0" aria-label="Position in the recording">
+            <span class="piano-time" id="piano-time">0:00</span>
+          </div>
+          <span class="piano-demo-status" id="piano-demo-status" aria-live="polite"></span>
+        </div>
+        <p class="piano-readout">Last note <span class="note-name" id="note-name">&nbsp;&nbsp;</span> <span class="piano-hint" id="piano-hint">A to ; play white notes, W E T Y U O P play black</span></p>
+        <p class="fig-note">The recording streams from Wikimedia Commons, from the Al Goldstein collection in the Pandora Music repository (<a href="https://commons.wikimedia.org/wiki/File:Franz_Liszt_-_Liebestraum,_Ab_Major.ogg" rel="noopener" target="_blank">CC BY-SA 2.0</a>). It is not me playing. While it plays, the keys light up from its live spectrum: a picture of the sound, not a transcription.</p>
+      </figure>
+    </article>
+
+    <article class="off-ball" aria-labelledby="ball-title">
+      <h3 id="ball-title" class="part-title part-title--sm"><span class="part-no">07-02</span>Volleyball <span lang="zh-Hant">排球</span></h3>
+      <p>Plus basketball and football. Below, a rally against a CPU bean. On the ground a click bumps or sets the ball on your side; jump with Space and click in the air to attack it over the net, aiming where you click on the CPU&rsquo;s half. Click at the very top of the jump for a perfect spike, right click in the air to tip it into the open court, and jump at the net to block. Pick the CPU: Rookie, Pro or Advanced.</p>
+      <figure class="fig off-fig">
+        <figcaption class="fig-cap"><span><b>Fig. 009</b> Bean volleyball, side elevation</span><span class="fig-hint" id="ball-hint">A / D move · Space jump · click: bump or set on the ground, spike in the air · right click: dive on the ground, tip in the air</span></figcaption>
+        <canvas id="ball-canvas" tabindex="0" role="application" aria-label="Volleyball game against a computer bean. A and D move, Space jumps. Left click, J or Enter plays the ball: a bump or set on the ground, an attack in the air. Right click, S or K dives on the ground and tips the ball over the net in the air." aria-describedby="ball-hint"></canvas>
+        <div class="ball-pads" id="ball-pads" aria-hidden="true">
+          <button type="button" data-act="left" aria-label="Move left"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></button>
+          <button type="button" data-act="right" aria-label="Move right"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></button>
+          <span class="pad-gap"></span>
+          <button type="button" data-act="jump" class="pad-word">Jump</button>
+          <button type="button" data-act="dive" class="pad-word">Dive</button>
+          <button type="button" data-act="hit" class="pad-word pad-gas">Hit</button>
+        </div>
+        <div class="ball-score">
+          <span class="sc"><span class="lbl">You</span><span class="roll" id="score-you" data-digits="2" data-value="0" data-blank="1">0</span></span>
+          <span class="sc-dash" aria-hidden="true">:</span>
+          <span class="sc"><span class="roll" id="score-cpu" data-digits="2" data-value="0" data-blank="1">0</span><span class="lbl">CPU</span></span>
+          <span class="ball-status" id="ball-status" aria-live="polite">First to 7. Click the court to serve.</span>
+          <div class="seg seg--sm ball-level" role="radiogroup" aria-label="Computer level">
+            <button type="button" role="radio" aria-checked="false" data-level="rookie">Rookie</button>
+            <button type="button" role="radio" aria-checked="true" data-level="pro">Pro</button>
+            <button type="button" role="radio" aria-checked="false" data-level="advanced">Advanced</button>
+          </div>
+          <button class="btn btn--sm" type="button" id="ball-reset">New match</button>
+        </div>
+      </figure>
+    </article>
+
+    <div class="off-list">
+      <table class="spec-table">
+        <caption class="vh">Other non-standard parts</caption>
+        <tbody>
+          <tr><th scope="row"><span class="mono">07-03</span> Community</th><td>Youth leader and musician at church. Co-organised a 60-person summer camp.</td></tr>
+          <tr><th scope="row"><span class="mono">07-04</span> Maths</th><td>Gold, UKMT Senior Mathematical Challenge</td></tr>
+          <tr><th scope="row"><span class="mono">07-05</span> Physics</th><td>Silver, Senior Physics Challenge</td></tr>
+          <tr><th scope="row"><span class="mono">07-06</span> Two wheels</th><td>Motorcycling. Useful context for a Ninja 400 engine.</td></tr>
+          <tr><th scope="row"><span class="mono">07-07</span> Languages</th><td>English, <span lang="zh-Hant">廣東話</span> Cantonese, <span lang="zh-Hant">普通話</span> Mandarin</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 CONTACT ============ -->
+<section class="page page--order" id="contact" data-page="8" aria-labelledby="contact-title">
+  <header class="page-head">
+    <span class="page-tab">08</span>
+    <h2 id="contact-title">Contact</h2>
+    <p class="page-meta">Email or LinkedIn</p>
+  </header>
+
+  <div class="order">
+    <div class="order-main">
+      <p class="order-lede">I&rsquo;m looking for a <strong>summer 2027 engineering internship</strong>. My degree also includes a six-month industry placement in Year 3.</p>
+      <dl class="order-lines">
+        <div>
+          <dt>Email <span lang="zh-Hant">電郵</span></dt>
+          <dd><a class="order-link" href="mailto:Francis.soo-hoo25@imperial.ac.uk">Francis.soo-hoo25@imperial.ac.uk</a>
+            <button class="btn btn--sm" type="button" id="copy-email" data-copy="Francis.soo-hoo25@imperial.ac.uk">Copy</button></dd>
+        </div>
+        <div>
+          <dt>LinkedIn</dt>
+          <dd><a class="order-link" href="https://www.linkedin.com/in/SiuTsunSoo-Hoo" target="_blank" rel="noopener">linkedin.com/in/SiuTsunSoo-Hoo</a></dd>
+        </div>
+        <div>
+          <dt>Ship to <span lang="zh-Hant">地點</span></dt>
+          <dd>London / Cardiff, UK</dd>
+        </div>
+      </dl>
+      <a class="btn btn--zinc btn--xl" href="mailto:Francis.soo-hoo25@imperial.ac.uk?subject=Summer%202027%20internship">Email Francis <span lang="zh-Hant">聯絡</span></a>
+    </div>
+
+    <div class="origin" aria-label="Origin">
+      <div class="stamp stamp--origin" aria-hidden="true">
+        <span class="stamp-zh" lang="zh-Hant">香港製造</span>
+        <span class="stamp-en">Made in Hong Kong</span>
+      </div>
+      <p class="origin-line">Made in Hong Kong. Assembled in Cardiff. Machined in London.</p>
+      <div class="chop chop--lg" aria-label="Name chop: 司徒兆浚" role="img"><span>司</span><span>徒</span><span>兆</span><span>浚</span></div>
+    </div>
+  </div>
+
+  <footer class="colophon">
+    <p>Soo-Hoo catalogue 2027. Figures tagged illustrative or schematic are models drawn for this page, not test data.</p>
+    <p>&copy; 2026 Siu Tsun Soo-Hoo <span lang="zh-Hant">司徒兆浚</span></p>
+  </footer>
+</section>
+
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
