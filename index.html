@@ -229,6 +229,10 @@
             <span><i class="k-dash"></i>Spin-up inertia, ρrα</span>
           </div>
           <div class="fw-legend" id="fw-legend" hidden></div>
+          <div class="fw-burst" id="fw-burst" role="status" hidden>
+            <p><b>Burst at <span id="fw-burst-rpm">0</span> rpm.</b> Peak stress at the pockets passed the 350&nbsp;MPa limit.</p>
+            <button class="btn btn--zinc" type="button" id="fw-restore">Restore flywheel <span lang="zh-Hant">復原飛輪</span></button>
+          </div>
         </div>
         <canvas class="fw-section" id="flywheel-section" role="img" aria-label="Section A–A: half profile of the flywheel showing hub, base plate and rim wall, with any skim on both sides of the plate."></canvas>
       </div>
@@ -273,6 +277,7 @@
           <dl>
             <div><dt>Peak von Mises, now</dt><dd><span id="fw-peak-now">0</span> MPa</dd></div>
             <div><dt>Peak at 12,000 rpm</dt><dd><span class="roll" id="fw-peak" data-digits="3" data-value="0" data-blank="1">000</span> MPa</dd></div>
+            <div><dt>Bursts at (350 MPa)</dt><dd id="fw-burst-at" class="readout-text">—</dd></div>
             <div><dt>Stored energy, now</dt><dd><span id="fw-energy">0.0</span> kJ</dd></div>
             <div><dt>Mass</dt><dd><span id="fw-mass">0.00</span> kg <span class="dd-sub" id="fw-mass-d">(stock)</span></dd></div>
             <div><dt>Rotational inertia</dt><dd><span id="fw-inertia">0.0%</span></dd></div>
@@ -281,7 +286,7 @@
           </dl>
         </div>
       </div>
-      <p class="fig-note">Model, not the team&rsquo;s FEA: an assumed steel flywheel, Ø160 mm, with an 8 mm rim wall 22 mm tall either side of a base plate, and a hub that bolts to the crank. Stress comes from rotating-disc theory plus the rim pulling on the plate, with concentration at each pocket. The trends are real physics; the numbers are only as good as the assumptions.</p>
+      <p class="fig-note">Model, not the team&rsquo;s FEA: an assumed steel flywheel, Ø160 mm, with an 8 mm rim wall 22 mm tall either side of a base plate, and a hub that bolts to the crank. Stress comes from rotating-disc theory plus the rim pulling on the plate, with concentration at each pocket. Machine it too hard and rev it, and it bursts once the peak passes an assumed 350&nbsp;MPa limit: a demonstration, not a predicted burst speed. The trends are real physics; the numbers are only as good as the assumptions.</p>
     </figure>
 
     <div class="bench-foot">

@@ -7,8 +7,10 @@ import { LineSegments2 } from 'three/addons/lines/LineSegments2.js';
 import { LineSegmentsGeometry } from 'three/addons/lines/LineSegmentsGeometry.js';
 import { LineMaterial } from 'three/addons/lines/LineMaterial.js';
 import { fitCanvas, whileVisible, clamp, roll, INK, PAPER, reduced, expose } from './util.js';
-import { EngineSound } from './sound.js';
+import { EngineSound, burstSound } from './sound.js';
 
+// assumed burst limit for the model's steel: past this peak von Mises the part lets go (illustrative)
+const LIMIT = 350e6;
 const RHO = 7850, NU = 0.3, E = 210e9;
 const R = 0.080, A = 0.015, HUB_R = 0.026, HUB_T = 0.020;
 const W0 = 0.008, H_RIM = 0.022, PITCH = 0.049, KAPPA = 0.6;
@@ -227,7 +229,12 @@ export function initFlywheel() {
     for (let k = 0; k < 6; k++) { const a = (k / 6) * Math.PI * 2 + 0.26; hub.holes.push(circlePath(0.22, Math.cos(a) * 2.05, Math.sin(a) * 2.05)); }
     const hubGeo = new THREE.ExtrudeGeometry(hub, { depth: HUB_T * CM, bevelEnabled: false, curveSegments: 32 });
     hubGeo.translate(0, 0, -HUB_T * CM / 2);
-    [rimGeo, webGeo, hubGeo].forEach((geo) => { part.add(new THREE.Mesh(geo, solidMat)); part.add(edges(geo)); });
+    [rimGeo, webGeo, hubGeo].forEach((geo) => {
+      const hubPiece = geo === hubGeo, m = new THREE.Mesh(geo, solidMat), e = edges(geo);
+      m.userData.hub = e.userData.hub = hubPiece;
+      part.add(m, e);
+    });
+    showWhole(!broken);
     uniforms.uRi.value = g.Ri; uniforms.uT.value = g.t; uniforms.uRp.value = g.rp || 0.001; uniforms.uN.value = g.n; uniforms.uWall.value = g.w;
     buildGhost(g);
     buildArrows(g);
@@ -307,6 +314,65 @@ export function initFlywheel() {
     });
   }
 
+  /* ---------- burst: the plate cracks through the pockets, the rim and web fly off, the hub stays ---------- */
+  let broken = false, burstAt = 0, burstT = 0, shardList = [];
+  const shards = new THREE.Group(); pivot.add(shards);
+  function showWhole(on) { part.children.forEach((o) => { o.visible = on || o.userData.hub; }); }
+  function buildShards(g) {
+    shards.traverse((o) => { if (o.geometry && o.geometry !== shaftGeo) o.geometry.dispose(); });
+    shards.clear(); shardList = [];
+    shards.rotation.z = phi;
+    const n = g.n || 3, off = g.n ? 0 : 0.4;
+    const cuts = Array.from({ length: n }, (_, k) => off + (k / n) * Math.PI * 2 + (g.n ? 0 : (Math.random() - 0.5) * 0.6));
+    const rH = HUB_R * CM, Ric = g.Ri * CM, Rc = R * CM, Pc = PITCH * CM, rp = g.rp * CM;
+    const at = (r, a) => [Math.cos(a) * r, Math.sin(a) * r];
+    for (let k = 0; k < n; k++) {
+      const a0 = cuts[k], a1 = k + 1 < n ? cuts[k + 1] : cuts[0] + Math.PI * 2;
+      // web: the crack runs from the hub, round half of each pocket, out to the rim
+      const web = new THREE.Shape();
+      web.moveTo(...at(rH, a0));
+      if (g.n) { web.lineTo(...at(Pc - rp, a0)); web.absarc(...at(Pc, a0), rp, a0 + Math.PI, a0, true); }
+      web.lineTo(...at(Ric + 0.02, a0));
+      web.absarc(0, 0, Ric + 0.02, a0, a1, false);
+      if (g.n) { web.lineTo(...at(Pc + rp, a1)); web.absarc(...at(Pc, a1), rp, a1, a1 - Math.PI, true); }
+      web.lineTo(...at(rH, a1));
+      web.absarc(0, 0, rH, a1, a0, true);
+      const webGeo = new THREE.ExtrudeGeometry(web, { depth: g.t * CM, bevelEnabled: false, curveSegments: 24 });
+      webGeo.translate(0, 0, -g.t * CM / 2);
+      const rim = new THREE.Shape();
+      rim.moveTo(...at(Ric, a0)); rim.lineTo(...at(Rc, a0)); rim.absarc(0, 0, Rc, a0, a1, false);
+      rim.lineTo(...at(Ric, a1)); rim.absarc(0, 0, Ric, a1, a0, true);
+      const rimGeo = new THREE.ExtrudeGeometry(rim, { depth: H_RIM * CM, bevelEnabled: false, curveSegments: 24 });
+      rimGeo.translate(0, 0, -H_RIM * CM / 2);
+      // outer group moves and tumbles about the piece's own centre; the inner one keeps the geometry in
+      // flywheel coordinates so the stress shader still reads the right place
+      const am = (a0 + a1) / 2, rc = (Ric + rH) / 2 + 1.2, c = at(rc, am);
+      const outer = new THREE.Group(), inner = new THREE.Group();
+      outer.position.set(c[0], c[1], 0); inner.position.set(-c[0], -c[1], 0);
+      [webGeo, rimGeo].forEach((geo) => inner.add(new THREE.Mesh(geo, solidMat), edges(geo)));
+      outer.add(inner); shards.add(outer);
+      // pieces leave along the tangent (the way they were already going), a little outward
+      const speed = (reduced ? 0.2 : 1) * (22 + 14 * (burstAt / RPM_MAX)) * (0.85 + Math.random() * 0.3);
+      shardList.push({
+        o: outer, x0: c[0], y0: c[1],
+        vx: -Math.sin(am) * speed + Math.cos(am) * speed * 0.35, vy: Math.cos(am) * speed + Math.sin(am) * speed * 0.35,
+        vz: (Math.random() - 0.5) * speed * 0.6,
+        wx: (Math.random() - 0.5) * 9, wy: (Math.random() - 0.5) * 9, wz: (Math.random() < 0.5 ? -1 : 1) * (3 + Math.random() * 5),
+      });
+    }
+  }
+  function moveShards(dt) {
+    burstT += dt;
+    shards.visible = broken && burstT < 3;
+    if (!shards.visible) return false;
+    const slow = burstT < 0.12 ? 0.15 : 1; // a beat where the cracks open before it flies
+    shardList.forEach((p) => {
+      p.o.position.x += p.vx * dt * slow; p.o.position.y += p.vy * dt * slow; p.o.position.z += p.vz * dt * slow;
+      p.o.rotation.x += p.wx * dt * slow; p.o.rotation.y += p.wy * dt * slow; p.o.rotation.z += p.wz * dt * slow;
+    });
+    return true;
+  }
+
   /* ---------- view: rotate, pan, zoom ---------- */
   const VIEW0 = { rx: -0.72, ry: 0.55, px: 0, py: 0, zoom: 1 };
   const view = { ...VIEW0 };
@@ -351,7 +417,7 @@ export function initFlywheel() {
   const snd = new EngineSound();
   let pressed = false, throttle = 0, limiterT = 0, killed = false, alpha = 0, phi = 0;
   const setLabel = () => { revBtn.classList.toggle('is-running', pressed); stopBtn.disabled = s.rpm < 20 && !pressed; };
-  const press = () => { if (pressed) return; pressed = true; killed = false; snd.build(); setLabel(); kick(); };
+  const press = () => { if (pressed || broken) return; pressed = true; killed = false; snd.build(); setLabel(); kick(); };
   const release = () => { if (!pressed) return; pressed = false; setLabel(); kick(); };
   revBtn.addEventListener('pointerdown', (ev) => { if (ev.button > 0) return; ev.preventDefault(); try { revBtn.setPointerCapture(ev.pointerId); } catch { /* synthetic */ } press(); });
   ['pointerup', 'pointercancel', 'lostpointercapture', 'blur'].forEach((e) => revBtn.addEventListener(e, release));
@@ -419,6 +485,13 @@ export function initFlywheel() {
     if (g.skim > 0.00004) lead(X((pT + rH) / 2), Y(g.Ri - g.skim / 2), labX, Y(g.Ri - g.skim / 2) + 14, `skim ${(g.skim * 1000).toFixed(1)} each side`);
     lead(X(hT), Y((A + HUB_R) / 2), labX, Y((A + HUB_R) / 2), 'hub, bolts to crank');
     ctx.fillText('R80', 10, Y(R) - 12);
+    if (broken) {
+      ctx.save(); ctx.translate(SW / 2, SH / 2); ctx.rotate(-0.18);
+      ctx.font = '900 22px Archivo, sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.strokeStyle = '#C8102E'; ctx.fillStyle = '#C8102E'; ctx.lineWidth = 2.5;
+      ctx.strokeRect(-92, -20, 184, 40); ctx.fillText('FRACTURED', 0, 1);
+      ctx.restore();
+    }
   }
 
   function drawLegend() {
@@ -437,7 +510,10 @@ export function initFlywheel() {
     lastReadout = now;
     const g = geometry(s), mp = massProps(g);
     roll('fw-peak', Math.round(peak(g, w2Of(RPM_RATED)) / 1e6));
-    $('fw-peak-now').textContent = Math.round(peak(g, w2Of(s.rpm)) / 1e6);
+    $('fw-peak-now').textContent = broken ? '—' : Math.round(peak(g, w2Of(s.rpm)) / 1e6);
+    const br = burstRpm();
+    $('fw-burst-at').textContent = br > RPM_MAX ? 'beyond the rev limit' : `${(Math.round(br / 10) * 10).toLocaleString('en-GB')} rpm`;
+    $('fw-burst-at').parentElement.classList.toggle('is-warn', br <= RPM_MAX);
     const omega = (s.rpm * Math.PI) / 30;
     $('fw-energy').textContent = ((0.5 * mp.I * omega * omega) / 1000).toFixed(1);
     $('fw-mass').textContent = mp.m.toFixed(2);
@@ -459,8 +535,47 @@ export function initFlywheel() {
   /* ---------- loop ---------- */
   let raf = 0, last = performance.now(), visible = true, rebuild = true;
   function kick() { if (!raf && visible) { last = performance.now(); raf = requestAnimationFrame(frame); } }
+  // peak stress is proportional to ω², so the stress per unit ρω² is fixed for a geometry: cache it
+  let perKey = '', perW2 = 0;
+  const stressPerW2 = () => {
+    const key = `${s.n}|${s.pocket}|${s.tMM}|${s.skimMM}`;
+    if (key !== perKey) { perKey = key; perW2 = peak(geometry(s), 1); }
+    return perW2;
+  };
+  const burstRpm = () => (30 / Math.PI) * Math.sqrt(LIMIT / (RHO * stressPerW2()));
+  const strain = () => (w2Of(s.rpm) * stressPerW2()) / LIMIT;
+
+  const burstPanel = $('fw-burst'), restoreBtn = $('fw-restore');
+  function burst() {
+    broken = true; burstAt = s.rpm; burstT = 0;
+    pressed = false; killed = true; throttle = 0;
+    snd.stopNow(); burstSound();
+    buildShards(geometry(s));
+    showWhole(false);
+    s.rpm *= 0.35; // the hub, now light, spins down on its own
+    $('fw-burst-rpm').textContent = Math.round(burstAt).toLocaleString('en-GB');
+    burstPanel.hidden = false;
+    revBtn.disabled = true;
+    stage.classList.remove('is-burst'); void stage.offsetWidth; stage.classList.add('is-burst');
+    setLabel(); readouts(true); kick();
+  }
+  function restore() {
+    broken = false; burstT = 0;
+    shards.traverse((o) => { if (o.geometry && o.geometry !== shaftGeo) o.geometry.dispose(); });
+    shards.clear(); shardList = [];
+    s.rpm = 0; killed = false;
+    showWhole(true);
+    burstPanel.hidden = true;
+    revBtn.disabled = false;
+    stage.classList.remove('is-burst', 'is-strained');
+    setLabel(); setTach(0); readouts(true); kick();
+    revBtn.focus({ preventScroll: true });
+  }
+  restoreBtn.addEventListener('click', restore);
+
   // the rev maths, separate from drawing so the test harness can step it
   function stepRevs(dt) {
+    if (!broken && s.rpm > 0 && strain() >= 1) { burst(); return; }
     if (pressed) {
       throttle = Math.min(1, throttle + dt * 1.35);
       // an S-curve: slow off the mark while the throttle opens, then building (no jump from rest)
@@ -472,7 +587,11 @@ export function initFlywheel() {
       if (s.rpm < 20) s.rpm = 0;
     }
   }
-  expose('flywheel', { press, release, stepRevs, stop: () => stopBtn.click(), get rpm() { return s.rpm; }, set rpm(v) { s.rpm = v; } });
+  expose('flywheel', {
+    press, release, stepRevs, restore, burstRpm, stop: () => stopBtn.click(),
+    get broken() { return broken; }, get rpm() { return s.rpm; }, set rpm(v) { s.rpm = v; },
+    setGeometry(o) { Object.assign(s, o); rebuild = true; readouts(true); kick(); },
+  });
   function frame(now) {
     raf = 0;
     const dt = Math.max(0, Math.min(0.05, (now - last) / 1000));
@@ -494,14 +613,18 @@ export function initFlywheel() {
     updateGhost(g, w2);
     updateArrows(w2, alpha);
     spinner.rotation.z = phi;
+    const flying = moveShards(dt);
+    // close to the limit the part starts to shake on its shaft
+    const st = broken ? 0 : strain(), shake = reduced ? 0 : clamp((st - 0.85) / 0.15, 0, 1) * 0.12;
+    stage.classList.toggle('is-strained', st > 0.85);
     pivot.rotation.set(view.rx, view.ry, 0);
-    pivot.position.set(view.px, view.py, 0);
+    pivot.position.set(view.px + (Math.random() - 0.5) * shake, view.py + (Math.random() - 0.5) * shake, 0);
     camera.zoom = view.zoom; camera.updateProjectionMatrix();
     renderer.render(scene, camera);
     drawSection(g, w2);
     drawLegend();
     readouts(!spinning);
-    if ((spinning || pressed || drag) && visible) kick();
+    if ((spinning || pressed || drag || flying) && visible) kick();
   }
 
   /* ---------- controls ---------- */

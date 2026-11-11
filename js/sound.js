@@ -45,6 +45,30 @@ export function onVolume(fn) { listeners.add(fn); return () => listeners.delete(
 // one anywhere on the page, so later sounds (even ones caused by just moving the mouse) play at once.
 ['pointerdown', 'keydown', 'touchend'].forEach((type) => window.addEventListener(type, () => audioCtx(), { capture: true, passive: true }));
 
+/** A flywheel letting go: a sharp crack, a low boom and a few metal rings as the pieces fly off. */
+export function burstSound() {
+  const c = audioCtx(), bus = out();
+  if (!c || !bus) return;
+  const t = c.currentTime;
+  const noise = c.createBuffer(1, Math.floor(c.sampleRate * 0.9), c.sampleRate);
+  const d = noise.getChannelData(0);
+  for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 3);
+  const src = c.createBufferSource(); src.buffer = noise;
+  const lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.setValueAtTime(9000, t); lp.frequency.exponentialRampToValueAtTime(260, t + 0.5);
+  const ng = c.createGain(); ng.gain.setValueAtTime(1.1, t); ng.gain.exponentialRampToValueAtTime(0.001, t + 0.85);
+  src.connect(lp).connect(ng).connect(bus); src.start(t);
+  const boom = c.createOscillator(); boom.type = 'sine';
+  boom.frequency.setValueAtTime(120, t); boom.frequency.exponentialRampToValueAtTime(38, t + 0.45);
+  const bg = c.createGain(); bg.gain.setValueAtTime(0.9, t); bg.gain.exponentialRampToValueAtTime(0.001, t + 0.6);
+  boom.connect(bg).connect(bus); boom.start(t); boom.stop(t + 0.65);
+  [1870, 2630, 3410, 4980].forEach((f, i) => {
+    const o = c.createOscillator(), g = c.createGain(), at = t + 0.03 + i * 0.09 + Math.random() * 0.05;
+    o.frequency.value = f * (0.97 + Math.random() * 0.06);
+    g.gain.setValueAtTime(0, at); g.gain.linearRampToValueAtTime(0.12, at + 0.004); g.gain.exponentialRampToValueAtTime(0.0005, at + 0.7);
+    o.connect(g).connect(bus); o.start(at); o.stop(at + 0.75);
+  });
+}
+
 function shaperCurve(k) {
   const n = 1024, c = new Float32Array(n);
   for (let i = 0; i < n; i++) {
